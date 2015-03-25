@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <title>Order Business Card</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:panel id="panel" header="Employee Business Card" style="width:400px; margin-bottom:10px;"> 
+                <h:panelGrid id="grid" columns="3">
+
+                    <p:outputLabel for="name" value="#{content['label.value.name']}"/>
+                    <p:inputText id="name" value="#{orderBean.businessCard.name}" tabindex="1" required="true" requiredMessage="Field is required" />
+                    <p:message for="name" />
+
+                    <p:outputLabel for="company" value="#{content['label.value.company']}" />
+                    <p:selectOneMenu id="company" value="#{orderBean.businessCard.company}" tabindex="2" validatorMessage="Field is required" required="true">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{orderBean.companies}" var="companyEnum" itemLabel="#{companyEnum.label}" itemValue="#{companyEnum}" />
+                    </p:selectOneMenu>
+                    <p:message for="company" />
+
+                    <p:outputLabel for="extension" value="#{content['label.value.extension']}"/>
+                    <p:inputMask id="extension" value="#{orderBean.businessCard.extension}" mask="9999" tabindex="3" required="true" requiredMessage="Field is required" />
+                    <p:message for="extension" />
+
+                    <p:outputLabel for="designation" value="#{content['label.value.designation']}" />
+                    <p:inputText id="designation" value="#{orderBean.businessCard.designation}" tabindex="4" validatorMessage="Field is required" required="true"/>
+                    <p:message for="designation" />
+
+                    <p:outputLabel for="cell" value="#{content['label.value.cell']}"/>
+                    <p:inputMask id="cell" value="#{orderBean.businessCard.cell}" tabindex="5" mask="(999) 999-9999" required="true" requiredMessage="Field is required"/>
+                    <p:message for="cell" />
+
+                    <p:outputLabel for="email" value="#{content['label.value.email']}"/>
+                    <p:inputText id="email" value="#{orderBean.businessCard.email}" tabindex="6" required="true" validatorMessage="Value does not match pattern.">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </p:inputText>
+                    <p:message for="email" />
+
+                </h:panelGrid>
+            </p:panel>
+
+            <p:commandButton action="#{orderBean.approve}" value="Submit" update="grid"/> 
+            <p:commandButton value="Reset" update="panel" process="@this" >
+              <p:resetInput target="panel" />  
+            </p:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

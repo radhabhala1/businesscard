@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Order Business Card</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+
+            <h:panelGrid id="grid" columns="2" cellpadding="5">
+                <p:outputLabel for="name" value="#{content['label.value.name']}"/>
+                <p:outputLabel id="name" value="#{orderBean.businessCard.name}" />
+                <p:outputLabel for="designation" value="#{content['label.value.designation']}" />
+                <p:outputLabel id="designation" value="#{orderBean.businessCard.designation}"/>
+                <p:outputLabel for="phone" value="#{content['label.value.phone']}" />
+                <p:outputLabel id="phone" value="#{orderBean.businessCard.company.phone}" />  
+                <p:outputLabel for="extension" value="#{content['label.value.extension']}"/>
+                <p:outputLabel id="extension" value="#{orderBean.businessCard.extension}"/>
+                <p:outputLabel for="cell" value="#{content['label.value.cell']}"/>
+                <p:outputLabel id="cell" value="#{orderBean.businessCard.cell}"/>
+                <p:outputLabel for="email" value="#{content['label.value.email']}"/>
+                <p:outputLabel id="email" value="#{orderBean.businessCard.email}" />
+                <p:outputLabel for="URL" value="#{content['label.value.companyurl']}" />
+                <p:outputLabel id="URL" value="#{orderBean.businessCard.company.companyURL}" />  
+                <p:outputLabel for="address" value="#{content['label.value.address']}" />
+                <p:outputLabel id="address" value="#{orderBean.businessCard.company.address}" /> 
+            </h:panelGrid>
+
+            <p:commandButton value="Order" action="#{orderBean.order}" onclick="dialogBox.show()" />
+            <p:dialog widgetVar="dialogBox"
+                      header="Business Card"><h3>Please check your email!</h3>
+            </p:dialog>    
+
+            <p:commandButton value="Edit" action="/order?faces-redirect=true"/>
+            <p:commandButton value="Cancel" action="#{orderBean.cancel}"/>
+        </h:form>
+    </h:body>
+</html>
